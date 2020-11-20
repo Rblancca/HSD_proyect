@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.hsd.contest.spain.view.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/action_splashFragment_to_menuActivity"
+            app:destination="@id/menuActivity"
+            app:exitAnim="@anim/fragment_fade_exit" />
+    </fragment>
+    <activity
+        android:id="@+id/menuActivity"
+        android:name="com.hsd.contest.spain.view.MenuActivity"
+        android:label="MenuActivity" />
+</navigation>

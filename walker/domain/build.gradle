@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'kotlin-kapt'
 }
 
 java {
@@ -10,4 +11,15 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    def arrow_version = "0.10.5"
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+    kapt "io.arrow-kt:arrow-meta:$arrow_version"
+
+    def koin = "2.0.1"
+    implementation "org.koin:koin-androidx-ext:$koin"
+    implementation "org.koin:koin-androidx-viewmodel:$koin"
+    implementation "org.koin:koin-androidx-scope:$koin"
+
 }
