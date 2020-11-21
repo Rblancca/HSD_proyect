@@ -21,5 +21,4 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$koin"
     implementation "org.koin:koin-androidx-viewmodel:$koin"
     implementation "org.koin:koin-androidx-scope:$koin"
-
 }

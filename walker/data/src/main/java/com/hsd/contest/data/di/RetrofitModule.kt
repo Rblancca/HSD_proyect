@@ -1,6 +1,6 @@
 package com.hsd.contest.data.di
 
-import com.hsd.contest.data.repository.ServiceDataSource
+import com.hsd.contest.data.repository.RoutesService
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import org.koin.dsl.module
@@ -16,7 +16,7 @@ class RetrofitModule {
     fun getModule() = module {
 
         single { createOkHttpClient() }
-        single<ServiceDataSource> { createApiClient(get()) }
+        single<RoutesService> { createApiClient(get()) }
 
     }
 
@@ -29,7 +29,7 @@ class RetrofitModule {
             .build()
     }
 
-    inline fun <reified T> createApiClient(
+    private inline fun <reified T> createApiClient(
         okHttpClient: OkHttpClient,
         baseUrl: String = BASE_URL
     ): T {

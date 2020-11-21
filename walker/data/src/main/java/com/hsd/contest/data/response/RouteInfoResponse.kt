@@ -1,8 +1,9 @@
 package com.hsd.contest.data.response
 
 import com.google.gson.annotations.SerializedName
+import com.hsd.contest.domain.entities.RouteInfo
 
-data class ResourcesResponse(
+data class RouteInfoResponse(
     @SerializedName("ca:municipio") val municipality: String,
     @SerializedName("ca:nombre") val name: String,
     @SerializedName("ca:info") val info: String,
@@ -22,4 +23,27 @@ data class ResourcesResponse(
     @SerializedName("ca:coord_latitud") val latitude: Double,
     @SerializedName("ca:permiso") val permission: String,
     @SerializedName("uri") val uri: String
-)
+) : Mappable<com.hsd.contest.domain.entities.RouteInfo> {
+    override fun toDomain(): com.hsd.contest.domain.entities.RouteInfo =
+        com.hsd.contest.domain.entities.RouteInfo(
+            municipality,
+            name,
+            info,
+            province,
+            heritage,
+            signal,
+            longitude,
+            modified,
+            travel,
+            distance,
+            difficulty,
+            cotMax,
+            protection,
+            duration,
+            type,
+            cotMin,
+            latitude,
+            permission,
+            uri
+        )
+}

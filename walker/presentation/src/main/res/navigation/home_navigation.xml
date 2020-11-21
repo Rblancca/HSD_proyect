@@ -5,6 +5,14 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.hsd.contest.spain.view.HomeFragment"
-        android:label="HomeFragment" />
+        android:name="com.hsd.contest.spain.view.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_routeDetailFragment"
+            app:destination="@id/routeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeDetailFragment"
+        android:name="com.hsd.contest.spain.view.routedetail.RouteDetailFragment"
+        android:label="RouteDetailFragment" />
 </navigation>

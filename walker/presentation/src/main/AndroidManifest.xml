@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Walker">
+        android:theme="@style/Theme.Walker"
+        android:name=".MyApplication">
         <activity
             android:name=".view.MainActivity"
             android:noHistory="true">
