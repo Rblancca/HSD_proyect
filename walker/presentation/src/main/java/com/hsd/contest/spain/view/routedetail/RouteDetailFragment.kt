@@ -23,12 +23,16 @@ class RouteDetailFragment : Fragment() {
         return binding?.root
     }
 
-    private fun initUI(){
-        binding?.routeDetailImage?.let {
+    private fun initUI() {
+        val route = (activity as RouteDetailActivity).args.routeInfo
+        binding?.apply {
             Glide.with(requireContext())
-                .load(URL_IMAGE + (activity as RouteDetailActivity).args.routeInfo.id + ".JPG")
+                .load(URL_IMAGE + route.id + ".JPG")
                 .placeholder(R.drawable.placeholder)
-                .into(it)
+                .into(routeDetailImage)
+            routeDetailTitle.text = route.name
+
         }
+
     }
 }

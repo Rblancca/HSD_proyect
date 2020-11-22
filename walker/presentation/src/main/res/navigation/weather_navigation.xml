@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.hsd.contest.spain.view.WeatherFragment"
+        android:name="com.hsd.contest.spain.view.weather.WeatherFragment"
         android:label="WeatherFragment" />
 </navigation>

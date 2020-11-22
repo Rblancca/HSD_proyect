@@ -8,7 +8,6 @@ data class RoutesResponse(
     val summary: SummaryResponse,
     @SerializedName("resources")
     val resources: List<RouteInfoResponse>
-): Mappable<com.hsd.contest.domain.entities.Routes>{
-    override fun toDomain(): com.hsd.contest.domain.entities.Routes =
-        com.hsd.contest.domain.entities.Routes(resources.map { it.toDomain() })
+) : Mappable<Routes> {
+    override fun toDomain(): Routes = Routes(resources.map { it.toDomain() })
 }
