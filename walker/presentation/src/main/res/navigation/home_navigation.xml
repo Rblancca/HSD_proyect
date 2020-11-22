@@ -8,11 +8,15 @@
         android:name="com.hsd.contest.spain.view.home.HomeFragment"
         android:label="HomeFragment" >
         <action
-            android:id="@+id/action_homeFragment_to_routeDetailFragment"
-            app:destination="@id/routeDetailFragment" />
+            android:id="@+id/action_homeFragment_to_routeDetailActivity"
+            app:destination="@id/routeDetailActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/routeDetailFragment"
-        android:name="com.hsd.contest.spain.view.routedetail.RouteDetailFragment"
-        android:label="RouteDetailFragment" />
+    <activity
+        android:id="@+id/routeDetailActivity"
+        android:name="com.hsd.contest.spain.view.routedetail.RouteDetailActivity"
+        android:label="RouteDetailActivity" >
+        <argument
+            android:name="routeInfo"
+            app:argType="com.hsd.contest.domain.entities.RouteInfo" />
+    </activity>
 </navigation>

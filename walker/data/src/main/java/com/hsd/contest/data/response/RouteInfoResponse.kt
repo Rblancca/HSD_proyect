@@ -23,9 +23,10 @@ data class RouteInfoResponse(
     @SerializedName("ca:coord_latitud") val latitude: Double,
     @SerializedName("ca:permiso") val permission: String,
     @SerializedName("uri") val uri: String
-) : Mappable<com.hsd.contest.domain.entities.RouteInfo> {
-    override fun toDomain(): com.hsd.contest.domain.entities.RouteInfo =
-        com.hsd.contest.domain.entities.RouteInfo(
+) : Mappable<RouteInfo> {
+    override fun toDomain(): RouteInfo =
+        RouteInfo(
+            imageId(uri),
             municipality,
             name,
             info,
@@ -46,4 +47,13 @@ data class RouteInfoResponse(
             permission,
             uri
         )
+
+    fun imageId(uri: String): String {
+        val id = uri.substringAfter("senderos/").substringBefore(".json")
+        return when {
+            id.length == 2 -> "2$id"
+            id.length > 2 -> "2${id.substring(0, 2)}"
+            else -> "20$id"
+        }
+    }
 }

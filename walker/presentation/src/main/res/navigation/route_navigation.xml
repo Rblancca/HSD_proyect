@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/route_navigation"
+    app:startDestination="@id/routeDetailFragment">
+
+    <fragment
+        android:id="@+id/routeDetailFragment"
+        android:name="com.hsd.contest.spain.view.routedetail.RouteDetailFragment"
+        android:label="RouteDetailFragment" >
+        <argument
+            android:name="routeInfo"
+            app:argType="com.hsd.contest.domain.entities.RouteInfo" />
+    </fragment>
+</navigation>

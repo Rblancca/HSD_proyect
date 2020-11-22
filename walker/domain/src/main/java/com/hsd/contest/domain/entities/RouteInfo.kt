@@ -1,6 +1,11 @@
 package com.hsd.contest.domain.entities
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class RouteInfo(
+    val id: String,
     val municipality: String,
     val name: String,
     val info: String,
@@ -20,4 +25,4 @@ data class RouteInfo(
     val latitude: Double,
     val permission: String,
     val uri: String
-)
+): Parcelable

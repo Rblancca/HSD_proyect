@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.MenuActivity" />
+        <activity android:name=".view.routedetail.RouteDetailActivity" />
 
     </application>
 

@@ -4,8 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
+        android:id="@+id/route_detail_image"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
+        android:scaleType="center"
         android:layout_height="200dp"/>
 
 
