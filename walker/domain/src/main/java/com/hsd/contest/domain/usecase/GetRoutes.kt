@@ -4,6 +4,6 @@ import arrow.core.Either
 import com.hsd.contest.domain.entities.ErrorResponse
 import com.hsd.contest.domain.entities.Routes
 
-class GetRoutes(private val serviceRepository: ServiceRepository) {
+class GetRoutes(private val serviceRepository: RoutesRepository) {
     suspend operator fun invoke(): Either<ErrorResponse, Routes> = serviceRepository.getRoutes()
 }

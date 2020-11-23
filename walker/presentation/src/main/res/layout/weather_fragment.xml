@@ -13,50 +13,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/weathe_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MultiAutoCompleteTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_title" />
 
-    <ImageView
-        android:id="@+id/weather_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_actual_temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_temperature_today"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_state"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/weather_next_days"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/weather_next_days_list"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/weathe_spinner_municipality"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weathe_spinner" />
+    <!-- <ImageView
+         android:id="@+id/weather_image"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_actual_temperature"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_city"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_temperature_today"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_state"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_date"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <TextView
+         android:id="@+id/weather_next_days"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/weather_next_days_list"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

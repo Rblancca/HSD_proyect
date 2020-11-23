@@ -1,7 +1,6 @@
 package com.hsd.contest.domain.entities
 
-data class Province(
-    val code: String,
+data class Municipality (
     val name: String
 ){
     override fun toString(): String {

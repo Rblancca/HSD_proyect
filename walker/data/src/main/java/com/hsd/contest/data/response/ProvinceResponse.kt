@@ -10,5 +10,13 @@ data class ProvinceResponse(
     @SerializedName("COMUNIDAD_CIUDAD_AUTONOMA") val city: String,
     @SerializedName("CAPITAL_PROVINCIA") val capital: String
 ) : Mappable<Province> {
-    override fun toDomain(): Province = Province(codeProv, provinceName)
+    override fun toDomain(): Province = Province(codeSize(codeProv.toString()), provinceName)
+
+    private fun codeSize(codeProv: String): String {
+        return if (codeProv.length == 1) {
+            "0$codeProv"
+        } else {
+            codeProv
+        }
+    }
 }
