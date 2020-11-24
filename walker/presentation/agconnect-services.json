@@ -1,0 +1,14 @@
+{
+	"client":{
+		"appType":"1",
+		"cp_id":"350034000000016520",
+		"product_id":"736430079244714265",
+		"client_id":"503051679319459008",
+		"client_secret":"2D78F6BA5129E75446F2F5A0A540DFE19A90E70C194CF228B678D3B6E79DCB18",
+		"project_id":"736430079244714265",
+		"app_id":"103340779",
+		"api_key":"CgB6e3x91eNqbBhkZp4kFpCbVgl2KXsh5eKEI65NDT3DYztRJke8DR97v2itTqb1p+2ctV7LiSsNV5u0QtUFbb8/",
+		"package_name":"com.hsd.contest.spain"
+	},
+	"configuration_version":"1.0"
+}
