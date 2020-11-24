@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.hsd.contest.domain.entities.ListMunicipality
 import com.hsd.contest.domain.entities.ListProvinces
+import com.hsd.contest.domain.entities.Municipality
 import com.hsd.contest.domain.entities.Province
 import com.hsd.contest.spain.databinding.WeatherFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,6 +38,9 @@ class WeatherFragment : Fragment() {
         viewModel.municipalities.observe(viewLifecycleOwner, { list ->
             initMunicipalitySpinner(list)
         })
+        viewModel.weather.observe(viewLifecycleOwner, { list ->
+            Toast.makeText(requireContext(), list.date, Toast.LENGTH_LONG).show()
+        })
     }
 
     private fun initMunicipalitySpinner(list: ListMunicipality) {
@@ -47,21 +52,26 @@ class WeatherFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding?.weatheSpinnerMunicipality?.adapter = adapter
         }
-        binding?.weatheSpinnerMunicipality?.onItemSelectedListener = (object : OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                //viewModel.getMunicipality((binding?.weatheSpinner?.selectedItem as Province).code)
-            }
+        binding?.weatheSpinnerMunicipality?.onItemSelectedListener =
+            (object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    var code = (binding?.weatheSpinner?.selectedItem as Province).code
+                    viewModel.weather(
+                        code,
+                        (code + "0" + position.toString())
+                    )
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                //
-            }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    //
+                }
 
-        })
+            })
     }
 
     private fun initProvinceSpinner(list: ListProvinces) {
