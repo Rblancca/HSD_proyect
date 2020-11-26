@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">walker</string>
+    <string name="difficulty">Dificultad: </string>
+    <string name="duration">Duración: </string>
 </resources>

@@ -24,7 +24,9 @@
         </activity>
         <activity android:name=".view.MenuActivity" />
         <activity android:name=".view.routedetail.RouteDetailActivity" />
-
+        <meta-data
+            android:name="com.hsd.contest.spain"
+            android:value="103340779"/>
     </application>
 
 </manifest>

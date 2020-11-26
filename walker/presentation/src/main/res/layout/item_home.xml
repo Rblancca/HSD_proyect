@@ -36,21 +36,70 @@
                 android:layout_marginEnd="@dimen/margin_16"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@+id/item_home_image"
                 tools:text="Nombre ruta" />
 
             <TextView
                 android:id="@+id/item_home_dif"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_16"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_16"
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
+                android:text="@string/difficulty"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/item_home_title" />
+
+            <TextView
+                android:id="@+id/item_home_dif_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textStyle="italic"
+                app:layout_constraintStart_toEndOf="@+id/item_home_dif"
+                app:layout_constraintTop_toBottomOf="@+id/item_home_title"
+                tools:text="Nombre ruta" />
+
+            <TextView
+                android:id="@+id/item_home_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="4dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="@string/duration"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/item_home_time_value"
+                app:layout_constraintTop_toBottomOf="@+id/item_home_title" />
+
+            <TextView
+                android:id="@+id/item_home_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_home_title"
                 tools:text="Nombre ruta" />
         </androidx.constraintlayout.widget.ConstraintLayout>

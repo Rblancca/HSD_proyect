@@ -1,7 +1,9 @@
 package com.hsd.contest.spain.view.home
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hsd.contest.domain.URL_IMAGE
@@ -37,7 +39,34 @@ class HomeAdapter(
                 .load(URL_IMAGE + route.id + ".JPG")
                 .placeholder(R.drawable.placeholder)
                 .into(bindingVH.itemHomeImage)
-            bindingVH.itemHomeDif.text = "dificultad: " + route.difficulty
+            when (route.difficulty) {
+                "Baja" -> {
+                    bindingVH.itemHomeDifValue.setTextColor(
+                        ResourcesCompat.getColor(
+                            bindingVH.root.context.resources,
+                            R.color.green, null
+                        )
+                    )
+                }
+                "Alta" -> {
+                    bindingVH.itemHomeDifValue.setTextColor(
+                        ResourcesCompat.getColor(
+                            bindingVH.root.context.resources,
+                            R.color.red, null
+                        )
+                    )
+                }
+                else -> {
+                    bindingVH.itemHomeDifValue.setTextColor(
+                        ResourcesCompat.getColor(
+                            bindingVH.root.context.resources,
+                            R.color.yellow, null
+                        )
+                    )
+                }
+            }
+            bindingVH.itemHomeDifValue.text = route.difficulty
+            bindingVH.itemHomeTimeValue.text = route.duration
         }
     }
 }

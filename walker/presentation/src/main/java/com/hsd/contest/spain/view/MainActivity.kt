@@ -1,6 +1,7 @@
 package com.hsd.contest.spain.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.hsd.contest.spain.databinding.SplashActivityBinding
 

@@ -16,7 +16,6 @@ import com.hsd.contest.domain.entities.Province
 import com.hsd.contest.spain.databinding.WeatherFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class WeatherFragment : Fragment() {
     private var binding: WeatherFragmentBinding? = null
     private val viewModel by viewModel<WeatherViewModel>()
