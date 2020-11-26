@@ -9,11 +9,10 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.hsd.contest.domain.entities.ListMunicipality
-import com.hsd.contest.domain.entities.ListProvinces
-import com.hsd.contest.domain.entities.Municipality
-import com.hsd.contest.domain.entities.Province
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.hsd.contest.domain.entities.*
 import com.hsd.contest.spain.databinding.WeatherFragmentBinding
+import com.hsd.contest.spain.view.home.HomeAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeatherFragment : Fragment() {
@@ -37,9 +36,25 @@ class WeatherFragment : Fragment() {
         viewModel.municipalities.observe(viewLifecycleOwner, { list ->
             initMunicipalitySpinner(list)
         })
-        viewModel.weather.observe(viewLifecycleOwner, { list ->
-            Toast.makeText(requireContext(), list.date, Toast.LENGTH_LONG).show()
+        viewModel.weather.observe(viewLifecycleOwner, { weatherInfo ->
+            initUI(weatherInfo)
         })
+    }
+
+    private fun initUI(weatherInfo: WeatherInfo) {
+        binding?.weatherCity?.text = weatherInfo.nameMunicipality
+        binding?.weatherTitle?.text = weatherInfo.date
+        binding?.weatherState?.text = weatherInfo.skyState
+        binding?.weatherActualTemperature?.text =
+            StringBuilder(weatherInfo.actualTemperature.toString()).append("º")
+        binding?.weatherTemperatureToday?.text =
+            StringBuilder(weatherInfo.temperatureMax.toString()).append("º / ")
+                .append(weatherInfo.temperatureMin).append("º")
+        binding?.weatherNextDaysList?.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = WeatherAdapter(weatherInfo.weatherNextDays)
+        }
     }
 
     private fun initMunicipalitySpinner(list: ListMunicipality) {
@@ -62,7 +77,7 @@ class WeatherFragment : Fragment() {
                     var code = (binding?.weatheSpinner?.selectedItem as Province).code
                     viewModel.weather(
                         code,
-                        (code + "0" + position.toString())
+                        (code + "0" + (position + 1).toString())
                     )
                 }
 
