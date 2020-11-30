@@ -5,6 +5,7 @@ import com.hsd.contest.domain.entities.Municipality
 
 data class MunicipalityResponse(
     @SerializedName("NOMBRE") val name: String,
+    @SerializedName("CODIGOINE") val code: String,
 ): Mappable<Municipality>{
-    override fun toDomain(): Municipality = Municipality(name)
+    override fun toDomain(): Municipality = Municipality(name, code)
 }

@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hsd.contest.domain.entities.*
+import com.hsd.contest.domain.entities.ListMunicipality
+import com.hsd.contest.domain.entities.ListProvinces
+import com.hsd.contest.domain.entities.Province
+import com.hsd.contest.domain.entities.WeatherInfo
 import com.hsd.contest.spain.databinding.WeatherFragmentBinding
-import com.hsd.contest.spain.view.home.HomeAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeatherFragment : Fragment() {
@@ -26,7 +27,15 @@ class WeatherFragment : Fragment() {
     ): View? {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
         setObserver()
+        initListeners()
         return binding?.root
+    }
+
+    private fun initListeners() {
+        binding?.weatherEditCity?.setOnClickListener {
+            binding?.containerWeather?.visibility = View.GONE
+            binding?.weatheSpinner?.visibility = View.VISIBLE
+        }
     }
 
     private fun setObserver() {
@@ -38,6 +47,12 @@ class WeatherFragment : Fragment() {
         })
         viewModel.weather.observe(viewLifecycleOwner, { weatherInfo ->
             initUI(weatherInfo)
+            if ( binding?.weatheSpinnerMunicipality?.visibility == View.VISIBLE){
+                binding?.weatheSpinner?.visibility = View.GONE
+                binding?.weatheSpinnerMunicipality?.visibility = View.GONE
+                binding?.containerWeather?.visibility = View.VISIBLE
+
+            }
         })
     }
 
@@ -66,6 +81,7 @@ class WeatherFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding?.weatheSpinnerMunicipality?.adapter = adapter
         }
+        binding?.weatheSpinnerMunicipality?.setSelection(list.list.indexOfFirst { municipality -> municipality.name == "Madrid" })
         binding?.weatheSpinnerMunicipality?.onItemSelectedListener =
             (object : OnItemSelectedListener {
                 override fun onItemSelected(
@@ -74,10 +90,10 @@ class WeatherFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    var code = (binding?.weatheSpinner?.selectedItem as Province).code
+                    val code = (binding?.weatheSpinner?.selectedItem as Province).code
                     viewModel.weather(
                         code,
-                        (code + "0" + (position + 1).toString())
+                        (list.list[position].code).substring(0, 5)
                     )
                 }
 
@@ -97,6 +113,7 @@ class WeatherFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding?.weatheSpinner?.adapter = adapter
         }
+        binding?.weatheSpinner?.setSelection(list.provinces.indexOfFirst { province -> province.name == "Madrid" })
         binding?.weatheSpinner?.onItemSelectedListener = (object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -105,6 +122,9 @@ class WeatherFragment : Fragment() {
                 id: Long
             ) {
                 viewModel.getListMunicipality((binding?.weatheSpinner?.selectedItem as Province).code)
+                if ( binding?.weatheSpinner?.visibility == View.VISIBLE){
+                    binding?.weatheSpinnerMunicipality?.visibility = View.VISIBLE
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
