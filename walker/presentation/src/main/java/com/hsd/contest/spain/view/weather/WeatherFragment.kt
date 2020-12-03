@@ -47,13 +47,17 @@ class WeatherFragment : Fragment() {
         })
         viewModel.weather.observe(viewLifecycleOwner, { weatherInfo ->
             initUI(weatherInfo)
-            if ( binding?.weatheSpinnerMunicipality?.visibility == View.VISIBLE){
-                binding?.weatheSpinner?.visibility = View.GONE
-                binding?.weatheSpinnerMunicipality?.visibility = View.GONE
-                binding?.containerWeather?.visibility = View.VISIBLE
-
+            if (binding?.weatheSpinnerMunicipality?.visibility == View.VISIBLE) {
+                showWeather()
             }
         })
+    }
+
+    private fun showWeather() {
+        binding?.weatheSpinner?.visibility = View.GONE
+        binding?.weatheSpinnerMunicipality?.visibility = View.GONE
+        binding?.buttonSearch?.visibility = View.GONE
+        binding?.containerWeather?.visibility = View.VISIBLE
     }
 
     private fun initUI(weatherInfo: WeatherInfo) {
@@ -91,10 +95,21 @@ class WeatherFragment : Fragment() {
                     id: Long
                 ) {
                     val code = (binding?.weatheSpinner?.selectedItem as Province).code
-                    viewModel.weather(
-                        code,
-                        (list.list[position].code).substring(0, 5)
-                    )
+                    if (viewModel.weather.value == null) {
+                        viewModel.weather(
+                            code,
+                            (list.list[position].code).substring(0, 5)
+                        )
+                    } else {
+                        binding?.buttonSearch?.visibility = View.VISIBLE
+                        binding?.buttonSearch?.setOnClickListener {
+                            viewModel.weather(
+                                code,
+                                (list.list[position].code).substring(0, 5)
+                            )
+                            showWeather()
+                        }
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -122,7 +137,7 @@ class WeatherFragment : Fragment() {
                 id: Long
             ) {
                 viewModel.getListMunicipality((binding?.weatheSpinner?.selectedItem as Province).code)
-                if ( binding?.weatheSpinner?.visibility == View.VISIBLE){
+                if (binding?.weatheSpinner?.visibility == View.VISIBLE) {
                     binding?.weatheSpinnerMunicipality?.visibility = View.VISIBLE
                 }
             }
