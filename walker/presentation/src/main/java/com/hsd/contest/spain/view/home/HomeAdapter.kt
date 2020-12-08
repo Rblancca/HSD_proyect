@@ -1,6 +1,5 @@
 package com.hsd.contest.spain.view.home
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat

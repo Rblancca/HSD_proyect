@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
-import com.huawei.hmf.tasks.OnCompleteListener;
-import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.hihealth.AutoRecorderController;
 import com.huawei.hms.hihealth.HiHealthOptions;
 import com.huawei.hms.hihealth.HuaweiHiHealth;
@@ -31,11 +29,11 @@ public class HiHealthBaseAdapter {
 
     private static final long FIRST_DELAY = 1000L;
 
-    private ISportListener mSportListener;
+    private final ISportListener mSportListener;
 
-    private Context mContext;
+    private final Context mContext;
 
-    private AutoRecorderController autoRecorderController;
+    private final AutoRecorderController autoRecorderController;
 
     private boolean mIsStopped;
 
@@ -51,12 +49,9 @@ public class HiHealthBaseAdapter {
 
     private Runnable mSampleHandler;
 
-    private OnSamplePointListener mListener = new OnSamplePointListener() {
-        @Override
-        public void onSamplePoint(SamplePoint samplePoint) {
-            Log.d(TAG, "on sample point received");
-            processSamplePoint(samplePoint);
-        }
+    private final OnSamplePointListener mListener = samplePoint -> {
+        Log.d(TAG, "on sample point received");
+        processSamplePoint(samplePoint);
     };
 
 
@@ -69,7 +64,12 @@ public class HiHealthBaseAdapter {
         mTempSetpValue = 0;
         mIsStopped = false;
 
-        HiHealthOptions options = HiHealthOptions.builder().build();
+        HiHealthOptions options = HiHealthOptions.builder()
+                .addDataType(DataType.DT_CONTINUOUS_STEPS_DELTA, HiHealthOptions.ACCESS_READ)
+                .addDataType(DataType.DT_CONTINUOUS_STEPS_DELTA, HiHealthOptions.ACCESS_WRITE)
+                .addDataType(DataType.DT_INSTANTANEOUS_HEIGHT, HiHealthOptions.ACCESS_READ)
+                .addDataType(DataType.DT_INSTANTANEOUS_HEIGHT, HiHealthOptions.ACCESS_WRITE)
+                .build();
         AuthHuaweiId hwId = HuaweiIdAuthManager.getExtendedAuthResult(options);
         autoRecorderController = HuaweiHiHealth.getAutoRecorderController(mContext, hwId);
 
@@ -127,14 +127,11 @@ public class HiHealthBaseAdapter {
                 .build();
 
         autoRecorderController.startRecord(DataType.DT_CONTINUOUS_STEPS_TOTAL, mListener)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.i(TAG, "success");
-                        } else {
-                            Log.i(TAG, "" + task.getException());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.i(TAG, "success");
+                    } else {
+                        Log.i(TAG, "" + task.getException());
                     }
                 });
 
@@ -152,14 +149,11 @@ public class HiHealthBaseAdapter {
         }
 
         autoRecorderController.stopRecord(DataType.DT_CONTINUOUS_STEPS_TOTAL, mListener)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.i(TAG, "success");
-                        } else {
-                            Log.i(TAG, "" + task.getException());
-                        }
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.i(TAG, "success");
+                    } else {
+                        Log.i(TAG, "" + task.getException());
                     }
                 });
         mHandler.removeCallbacks(mSampleHandler);

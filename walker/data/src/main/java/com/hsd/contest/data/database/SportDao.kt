@@ -1,4 +1,4 @@
-package com.hsd.contest.spain.view.sportprofile
+package com.hsd.contest.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -7,11 +7,11 @@ import androidx.room.*
 interface SportDao {
     @Transaction
     @Query("select * FROM sports WHERE sportType = :sportType ORDER BY id DESC LIMIT 1")
-    fun getLatestSportByType(sportType: SportType): LiveData<SportAndTimeSeqData?>
+    fun getLatestSportByType(sportType: String): LiveData<SportAndTimeSeqData?>
 
     @Transaction
     @Query("select * FROM sports WHERE sportType = :sportType")
-    fun getSports(sportType: SportType): LiveData<List<SportAndTimeSeqData>>
+    fun getSports(sportType: String): LiveData<List<SportAndTimeSeqData>>
 
 
     @Transaction

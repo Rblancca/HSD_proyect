@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hsd.contest.spain.databinding.ProfileFragmentBinding
+import com.hsd.contest.spain.view.MenuActivity
 import com.hsd.contest.spain.view.sportprofile.serviceshuawei.HiHealthSetup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,13 +21,23 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
-        HiHealthSetup.login(requireActivity(),viewModel)
+        HiHealthSetup.login(requireActivity(), viewModel)
         viewModel.onStart()
+        analytics()
+        viewModel.totalSteps.observe(viewLifecycleOwner, {
+            binding?.steps?.text = it
+        })
         return binding?.root
+    }
+
+    private fun analytics() {
+        val bundle = Bundle()
+        bundle.putString("screen_name", "Profile)")
+        (activity as MenuActivity).instance?.onEvent("screen_Profile", bundle)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        HiHealthSetup.onActivityResult(requestCode, resultCode, data)
+        HiHealthSetup.onActivityResult(requestCode, data)
     }
 }

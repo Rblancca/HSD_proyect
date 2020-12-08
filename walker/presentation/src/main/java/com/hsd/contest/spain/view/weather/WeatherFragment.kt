@@ -9,11 +9,14 @@ import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hsd.contest.domain.entities.ListMunicipality
 import com.hsd.contest.domain.entities.ListProvinces
 import com.hsd.contest.domain.entities.Province
 import com.hsd.contest.domain.entities.WeatherInfo
+import com.hsd.contest.spain.R
 import com.hsd.contest.spain.databinding.WeatherFragmentBinding
+import com.hsd.contest.spain.view.MenuActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WeatherFragment : Fragment() {
@@ -27,13 +30,21 @@ class WeatherFragment : Fragment() {
     ): View? {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
         setObserver()
+        analytics()
         initListeners()
         return binding?.root
+    }
+
+    private fun analytics() {
+        val bundle = Bundle()
+        bundle.putString("screen_name", "Weather)")
+        (activity as MenuActivity).instance?.onEvent("screen_Weather", bundle)
     }
 
     private fun initListeners() {
         binding?.weatherEditCity?.setOnClickListener {
             binding?.containerWeather?.visibility = View.GONE
+            binding?.containerSearchWeather?.visibility = View.VISIBLE
             binding?.weatheSpinner?.visibility = View.VISIBLE
         }
     }
@@ -44,6 +55,15 @@ class WeatherFragment : Fragment() {
         })
         viewModel.municipalities.observe(viewLifecycleOwner, { list ->
             initMunicipalitySpinner(list)
+        })
+        viewModel.error.observe(viewLifecycleOwner, {
+            binding?.root?.let { root ->
+                Snackbar.make(
+                    root,
+                    R.string.error_alert,
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
         })
         viewModel.weather.observe(viewLifecycleOwner, { weatherInfo ->
             initUI(weatherInfo)
@@ -57,10 +77,12 @@ class WeatherFragment : Fragment() {
         binding?.weatheSpinner?.visibility = View.GONE
         binding?.weatheSpinnerMunicipality?.visibility = View.GONE
         binding?.buttonSearch?.visibility = View.GONE
+        binding?.containerSearchWeather?.visibility = View.GONE
         binding?.containerWeather?.visibility = View.VISIBLE
     }
 
     private fun initUI(weatherInfo: WeatherInfo) {
+        binding?.containerWeather?.visibility = View.VISIBLE
         binding?.weatherCity?.text = weatherInfo.nameMunicipality
         binding?.weatherTitle?.text = weatherInfo.date
         binding?.weatherState?.text = weatherInfo.skyState
@@ -143,7 +165,7 @@ class WeatherFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                //
+                // don't do nothing
             }
 
         })

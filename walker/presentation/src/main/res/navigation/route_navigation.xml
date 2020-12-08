@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/route_navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/route_navigation"
     app:startDestination="@id/routeDetailFragment">
 
     <fragment
         android:id="@+id/routeDetailFragment"
         android:name="com.hsd.contest.spain.view.routedetail.RouteDetailFragment"
-        android:label="RouteDetailFragment" >
+        android:label="RouteDetailFragment">
         <argument
             android:name="routeInfo"
             app:argType="com.hsd.contest.domain.entities.RouteInfo" />
+        <action
+            android:id="@+id/action_routeDetailFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.hsd.contest.spain.view.map.MapFragment"
+        android:label="MapFragment" >
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument android:name="longitude"
+            app:argType="string" />
     </fragment>
 </navigation>

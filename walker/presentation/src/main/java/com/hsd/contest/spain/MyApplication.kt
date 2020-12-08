@@ -2,6 +2,7 @@ package com.hsd.contest.spain
 
 import android.app.Application
 import com.hsd.contest.data.di.DataKoinConfiguration
+import com.hsd.contest.data.di.DatabaseModule
 import com.hsd.contest.data.di.RetrofitModule
 import com.hsd.contest.domain.di.DomainKoinConfiguration
 import com.hsd.contest.spain.di.PresentationKoinConfiguration
@@ -18,6 +19,7 @@ class MyApplication : Application() {
                 listOf(
                     RetrofitModule().getModule(),
                     DataKoinConfiguration().getModule(),
+                    DatabaseModule().getModule(),
                     DomainKoinConfiguration().getModule(),
                     PresentationKoinConfiguration().getModule()
                 )

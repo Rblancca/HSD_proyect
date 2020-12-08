@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class TomorrowResponse (
 	@SerializedName("@attributes") val attributes : AttributesResponse,
-	@SerializedName("estado_cielo") val estado_cielo : List<String>,
-	@SerializedName("precipitacion") val precipitacion : List<Int>,
-	@SerializedName("prob_precipitacion") val prob_precipitacion : List<Int>,
-	@SerializedName("prob_tormenta") val prob_tormenta : List<Int>,
-	@SerializedName("nieve") val nieve : List<Int>,
-	@SerializedName("prob_nieve") val prob_nieve : List<Int>,
-	@SerializedName("temperatura") val temperatura : List<Int>,
-	@SerializedName("sens_termica") val sens_termica : List<Int>,
-	@SerializedName("humedad_relativa") val humedad_relativa : List<Int>,
-	@SerializedName("viento") val viento : List<Viento>,
+	@SerializedName("estado_cielo") val skyState : List<String>,
+	@SerializedName("precipitacion") val rain : List<Int>,
+	@SerializedName("prob_precipitacion") val probRain : List<Int>,
+	@SerializedName("prob_tormenta") val prodStrong : List<Int>,
+	@SerializedName("nieve") val snow : List<Int>,
+	@SerializedName("prob_nieve") val prodSnow : List<Int>,
+	@SerializedName("temperatura") val temperature : List<Int>,
+	@SerializedName("sens_termica") val thermalSensation: List<Int>,
+	@SerializedName("humedad_relativa") val rh : List<Int>,
+	@SerializedName("viento") val wind : List<WindResponse>,
 	@SerializedName("racha_max") val racha_max : List<Int>
 )

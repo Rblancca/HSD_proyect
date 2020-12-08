@@ -18,7 +18,129 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_16"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_20"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/route_detail_image"
         tools:text="Nombre" />
 
+    <TextView
+        android:id="@+id/route_detail_municip_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/municip"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_title" />
+
+    <TextView
+        android:id="@+id/route_detail_municip_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        app:layout_constraintStart_toEndOf="@+id/route_detail_municip_title"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_title"
+        tools:text="Cadiz" />
+
+    <TextView
+        android:id="@+id/route_detail_dif_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/difficulty"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_municip_title" />
+
+    <TextView
+        android:id="@+id/route_detail_dif_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/route_detail_dif_title"
+        app:layout_constraintStart_toEndOf="@+id/route_detail_dif_title"
+        app:layout_constraintTop_toTopOf="@+id/route_detail_dif_title"
+        tools:text="alta" />
+
+    <TextView
+        android:id="@+id/route_detail_duration_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/duration"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_dif_value" />
+
+    <TextView
+        android:id="@+id/route_detail_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/route_detail_duration_title"
+        app:layout_constraintStart_toEndOf="@+id/route_detail_duration_title"
+        app:layout_constraintTop_toTopOf="@+id/route_detail_duration_title"
+        tools:text="duracion" />
+
+    <ImageView
+        android:id="@+id/route_detail_distance_ico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:src="@drawable/manwalking_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_duration_title" />
+
+    <TextView
+        android:id="@+id/route_detail_distance_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        app:layout_constraintStart_toEndOf="@+id/route_detail_distance_ico"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_duration_title"
+        tools:text="933km" />
+
+    <ImageView
+        android:id="@+id/route_detail_place_ico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:src="@drawable/map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_distance_value" />
+
+    <TextView
+        android:id="@+id/route_detail_place_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:text="@string/place"
+        android:textColor="@color/purple_700"
+        app:layout_constraintStart_toEndOf="@+id/route_detail_place_ico"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_distance_value" />
+
+    <TextView
+        android:id="@+id/route_detail_more_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_16"
+        android:gravity="center"
+        android:text="@string/more_info"
+        android:textColor="@color/purple_700"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/route_detail_place_value" />
+
+    <com.huawei.hms.ads.banner.BannerView
+        android:id="@+id/hw_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:adId="testw6vs28auh3"
+        app:bannerSize="BANNER_SIZE_360_57"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

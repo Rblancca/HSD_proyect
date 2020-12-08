@@ -1,7 +1,5 @@
 package com.hsd.contest.spain.view.sportprofile.serviceshuawei;
 
-import com.hsd.contest.spain.view.sportprofile.serviceshuawei.BaseSportData;
-
 public class WalkingSportData extends BaseSportData {
     private long mTimestamp;
     private long mStepDelta;

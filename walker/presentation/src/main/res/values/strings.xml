@@ -3,4 +3,8 @@
     <string name="difficulty">Dificultad: </string>
     <string name="duration">Duración: </string>
     <string name="search">Buscar</string>
+    <string name="more_info">más info</string>
+    <string name="municip">Municipio:</string>
+    <string name="place">Ver en mapa</string>
+    <string name="error_alert">Ha sucedido un error, intentelo mas tarde</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hsd.contest.spain.view.sportprofile
+package com.hsd.contest.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

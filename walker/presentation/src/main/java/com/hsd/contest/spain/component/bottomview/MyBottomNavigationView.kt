@@ -61,12 +61,7 @@ class MyBottomNavigationView : BottomAppBar {
                 R.color.black
             )
         )
-
-        if (this.selected == selected) {
-            itemReselected?.invoke()
-        } else {
-            itemPressed?.invoke(selected)
-        }
+        itemPressed?.invoke(selected)
     }
 
     private var startIconResource: Int = -1

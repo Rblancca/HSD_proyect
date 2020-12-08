@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.hsd.contest.spain.view.sportprofile.ProfileViewModel;
@@ -33,8 +34,6 @@ public class HiHealthSetup {
     private static final int REQUEST_CODE_PERMISSION = 4727;
 
     private static final int MESSAGE_REQUEST_PERMISSION = 1;
-
-    private static HuaweiIdAuthService nHuaweiIdAuthService;
 
     private static AuthHuaweiId mAccount;
 
@@ -67,16 +66,23 @@ public class HiHealthSetup {
         mViewModel = viewModel;
 
         List<Scope> list = new ArrayList<>();
+        // View and store the step count in Health Kit.
+        list.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
+        // View and store the height in Health Kit.
+        list.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
+        // View and store the heart rate data in Health Kit.
+        list.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));
+
         String[] maxScopes = Scopes.getMaxScopes();
         Scope[] allRequiredScopes = new Scope[maxScopes.length];
         for (int i = 0; i < allRequiredScopes.length; i++) {
             allRequiredScopes[i] = new Scope(maxScopes[i]);
         }
         Collections.addAll(list, allRequiredScopes);
-        HuaweiIdAuthParamsHelper authParamsHelper = new HuaweiIdAuthParamsHelper();
-        HuaweiIdAuthParams authParams = authParamsHelper.setIdToken().setScopeList(list).createParams();
+        HuaweiIdAuthParamsHelper authParamsHelper = new HuaweiIdAuthParamsHelper(HuaweiIdAuthParams.DEFAULT_AUTH_REQUEST_PARAM);
+        HuaweiIdAuthParams authParams = authParamsHelper.setIdToken().setAccessToken().setScopeList(list).createParams();
 
-        nHuaweiIdAuthService = HuaweiIdAuthManager.getService(activity.getApplicationContext(), authParams);
+        HuaweiIdAuthService nHuaweiIdAuthService = HuaweiIdAuthManager.getService(activity.getApplicationContext(), authParams);
         mAccount = HuaweiIdAuthManager.getAuthResult();
         if (mAccount == null) {
             Intent signInIntent = nHuaweiIdAuthService.getSignInIntent();
@@ -89,7 +95,7 @@ public class HiHealthSetup {
 
     }
 
-    public static void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public static void onActivityResult(int requestCode, @Nullable Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_LOGIN:
                 handleSignInResult(data);

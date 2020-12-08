@@ -12,12 +12,16 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val app: Application,
+    private val walkingRepository: WalkingRepository
 ) : ViewModel(),
     ISportListener {
-    val hiHealthBaseAdapter: HiHealthBaseAdapter = HiHealthBaseAdapter(app.applicationContext, this)
-    var currentWalk: WalkingRepository.WalkingSport? = null
+    private val hiHealthBaseAdapter: HiHealthBaseAdapter = HiHealthBaseAdapter(app.applicationContext, this)
+    private var currentWalk: WalkingRepository.WalkingSport? = null
 
-    /*val strideFrequency: LiveData<String?> = walkingRepository.getLatestSport().map {
+    val totalSteps: LiveData<String?> = walkingRepository.getLatestSport().map {
+        it?.formatTotalSteps()
+    }
+    val strideFrequency: LiveData<String?> = walkingRepository.getLatestSport().map {
         it?.let {
             var stride: Long = 0
             val lastStepDelta = it.stepDeltaSeq.lastOrNull()
@@ -26,7 +30,10 @@ class ProfileViewModel(
             }
             stride.toString()
         }
-    }*/
+    }
+    val calorie: LiveData<String?> = walkingRepository.getLatestSport().map {
+        it?.formatCalorie()
+    }
     override val sportType: String
         get() = TODO("Not yet implemented")
 
@@ -36,7 +43,7 @@ class ProfileViewModel(
 
     override fun onStart() {
         GlobalScope.launch {
-            //currentWalk = walkingRepository.createWalkingSport()
+            currentWalk = walkingRepository.createWalkingSport()
         }
         hiHealthBaseAdapter.start(this)
     }
