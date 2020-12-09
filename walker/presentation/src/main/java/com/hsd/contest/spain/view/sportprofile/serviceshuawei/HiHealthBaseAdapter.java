@@ -64,15 +64,9 @@ public class HiHealthBaseAdapter {
         mTempSetpValue = 0;
         mIsStopped = false;
 
-        HiHealthOptions options = HiHealthOptions.builder()
-                .addDataType(DataType.DT_CONTINUOUS_STEPS_DELTA, HiHealthOptions.ACCESS_READ)
-                .addDataType(DataType.DT_CONTINUOUS_STEPS_DELTA, HiHealthOptions.ACCESS_WRITE)
-                .addDataType(DataType.DT_INSTANTANEOUS_HEIGHT, HiHealthOptions.ACCESS_READ)
-                .addDataType(DataType.DT_INSTANTANEOUS_HEIGHT, HiHealthOptions.ACCESS_WRITE)
-                .build();
+        HiHealthOptions options = HiHealthOptions.builder().build();
         AuthHuaweiId hwId = HuaweiIdAuthManager.getExtendedAuthResult(options);
         autoRecorderController = HuaweiHiHealth.getAutoRecorderController(mContext, hwId);
-
         setupSample();
     }
 

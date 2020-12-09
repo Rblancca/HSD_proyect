@@ -9,6 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:itemCount="4"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/margin_32"
         tools:listitem="@layout/item_home" />
 </androidx.constraintlayout.widget.ConstraintLayout>

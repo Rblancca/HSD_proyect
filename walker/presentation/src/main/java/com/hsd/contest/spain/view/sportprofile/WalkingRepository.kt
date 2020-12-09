@@ -18,8 +18,8 @@ class WalkingRepository(
                     sport = it.sport
                     it.timeSeqDatas.forEach { seqData ->
                         when (seqData.tag) {
-                            // TimeSeqDataTag.STEP_DELTA -> stepDeltaSeq.add(seqData)
-                            //TimeSeqDataTag.STRIDE_FREQUENCY -> strideFrequencySeq.add(seqData)
+                            TimeSeqDataTag.STEP_DELTA.name -> stepDeltaSeq.add(seqData)
+                            TimeSeqDataTag.STRIDE_FREQUENCY.name -> strideFrequencySeq.add(seqData)
                             else -> throw IllegalStateException()
                         }
                     }
@@ -34,7 +34,6 @@ class WalkingRepository(
             val sport = Sport(
                 sportType = SportType.WALKING.name,
                 sportStatus = SportStatus.STARTED.name
-                // startTime = Calendar.getInstance()
             )
             sport.id = sportDatabase.insertSport(sport)
             WalkingSport(sport = sport)
@@ -60,6 +59,19 @@ class WalkingRepository(
                 total += it.value
             }
             return total.toString()
+        }
+
+        suspend fun feedStepDeltaData(stepDelta: Long, time: Long) {
+            withContext(Dispatchers.IO) {
+                sportDatabase.insertTimeSeqData(
+                    TimeSeqData(
+                        tag = TimeSeqDataTag.STEP_DELTA.name,
+                        sportId = sport.id,
+                        time = time,
+                        value = stepDelta
+                    )
+                )
+            }
         }
 
         fun formatCalorie(): String {

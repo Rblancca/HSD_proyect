@@ -21,4 +21,19 @@ class SportDatabaseImpl(private val appDatabase: AppDatabase) : SportDatabase {
      override fun updateSport(sport: Sport) {
          appDatabase.sportDao().updateSport(sport)
      }
+
+    override fun getTimeSeqDatas(): LiveData<List<TimeSeqData>> =
+        appDatabase.timeSeqDataDao().getTimeSeqDatas()
+
+
+    override fun getTimeSeqData(id: Long): LiveData<TimeSeqData> =
+        appDatabase.timeSeqDataDao().getTimeSeqData(id)
+
+    override fun getTimeSeqDataForSport(sportId: Long): LiveData<List<TimeSeqData>> =
+        appDatabase.timeSeqDataDao().getTimeSeqDataForSport(sportId)
+
+
+    override fun insertTimeSeqData(data: TimeSeqData): Long =
+        appDatabase.timeSeqDataDao().insertTimeSeqData(data)
+
 }

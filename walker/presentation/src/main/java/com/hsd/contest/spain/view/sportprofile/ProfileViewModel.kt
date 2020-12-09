@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import com.hsd.contest.data.database.TimeSeqData
 import com.hsd.contest.spain.view.sportprofile.serviceshuawei.BaseSportData
 import com.hsd.contest.spain.view.sportprofile.serviceshuawei.HiHealthBaseAdapter
 import com.hsd.contest.spain.view.sportprofile.serviceshuawei.ISportListener
+import com.hsd.contest.spain.view.sportprofile.serviceshuawei.WalkingSportData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -15,7 +17,8 @@ class ProfileViewModel(
     private val walkingRepository: WalkingRepository
 ) : ViewModel(),
     ISportListener {
-    private val hiHealthBaseAdapter: HiHealthBaseAdapter = HiHealthBaseAdapter(app.applicationContext, this)
+    private val hiHealthBaseAdapter: HiHealthBaseAdapter =
+        HiHealthBaseAdapter(app.applicationContext, this)
     private var currentWalk: WalkingRepository.WalkingSport? = null
 
     val totalSteps: LiveData<String?> = walkingRepository.getLatestSport().map {
@@ -34,12 +37,18 @@ class ProfileViewModel(
     val calorie: LiveData<String?> = walkingRepository.getLatestSport().map {
         it?.formatCalorie()
     }
+    val stepDeltaSequence: LiveData<List<TimeSeqData>> = walkingRepository.getLatestSport().map {
+        it?.stepDeltaSeq ?: mutableListOf()
+    }
     override val sportType: String
         get() = TODO("Not yet implemented")
 
     override fun onRecvData(data: BaseSportData) {
-        TODO("Not yet implemented")
-    }
+        if (data is WalkingSportData) {
+            GlobalScope.launch {
+                currentWalk?.feedStepDeltaData(data.stepDelta, data.timestamp)
+            }
+        }    }
 
     override fun onStart() {
         GlobalScope.launch {
@@ -64,12 +73,13 @@ class ProfileViewModel(
         }
     }
 
+
     override fun onRunning() {
         TODO("Not yet implemented")
     }
 
     override fun onConnect() {
-        // TODO("Not yet implemented")
+        onStart()
     }
 
     override fun onDisconnect() {

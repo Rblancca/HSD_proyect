@@ -22,10 +22,18 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = ProfileFragmentBinding.inflate(inflater, container, false)
         HiHealthSetup.login(requireActivity(), viewModel)
-        viewModel.onStart()
         analytics()
-        viewModel.totalSteps.observe(viewLifecycleOwner, {
-            binding?.steps?.text = it
+        viewModel.totalSteps.observe(viewLifecycleOwner, { steps ->
+            steps?.let {
+                binding?.profileStepsValue?.text = it
+                binding?.profileProgress?.progress = it.toFloat()
+            }
+        })
+        viewModel.strideFrequency.observe(viewLifecycleOwner, {
+            binding?.profileStepsFreqValue?.text = it
+        })
+        viewModel.calorie.observe(viewLifecycleOwner, {
+            binding?.profileCaloriesValue?.text = it
         })
         return binding?.root
     }

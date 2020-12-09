@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.hsd.contest.spain.view.sportprofile.ProfileViewModel;
+import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.hihealth.data.Scopes;
 import com.huawei.hms.support.api.entity.auth.Scope;
 import com.huawei.hms.support.hwid.HuaweiIdAuthAPIManager;
@@ -67,11 +68,11 @@ public class HiHealthSetup {
 
         List<Scope> list = new ArrayList<>();
         // View and store the step count in Health Kit.
-        list.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));
+        list.add(new Scope(Scopes.HEALTHKIT_STEP_BOTH));/*
         // View and store the height in Health Kit.
         list.add(new Scope(Scopes.HEALTHKIT_HEIGHTWEIGHT_BOTH));
         // View and store the heart rate data in Health Kit.
-        list.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));
+        list.add(new Scope(Scopes.HEALTHKIT_HEARTRATE_BOTH));*/
 
         String[] maxScopes = Scopes.getMaxScopes();
         Scope[] allRequiredScopes = new Scope[maxScopes.length];
@@ -83,6 +84,14 @@ public class HiHealthSetup {
         HuaweiIdAuthParams authParams = authParamsHelper.setIdToken().setAccessToken().setScopeList(list).createParams();
 
         HuaweiIdAuthService nHuaweiIdAuthService = HuaweiIdAuthManager.getService(activity.getApplicationContext(), authParams);
+        Task<AuthHuaweiId> authHuaweiIdTask = nHuaweiIdAuthService.silentSignIn();
+        authHuaweiIdTask.addOnSuccessListener(huaweiId -> {
+            Log.d(TAG, "request ok");
+        }).addOnFailureListener(exception -> {
+            Log.d(TAG, "request error");
+        });
+
+
         mAccount = HuaweiIdAuthManager.getAuthResult();
         if (mAccount == null) {
             Intent signInIntent = nHuaweiIdAuthService.getSignInIntent();

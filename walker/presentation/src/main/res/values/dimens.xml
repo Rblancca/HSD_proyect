@@ -4,4 +4,9 @@
     <dimen name="card_view_radius">8dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="text_size_20">20sp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="text_size_15">15sp</dimen>
 </resources>

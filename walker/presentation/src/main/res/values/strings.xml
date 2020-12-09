@@ -7,4 +7,9 @@
     <string name="municip">Municipio:</string>
     <string name="place">Ver en mapa</string>
     <string name="error_alert">Ha sucedido un error, intentelo mas tarde</string>
+    <string name="progres_day_title">Tu progreso diario</string>
+    <string name="step_today">Pasos diarios</string>
+    <string name="frequency_steps">Frecuencia de pasos:</string>
+    <string name="profile_calories_title">Hoy has quemado: (Kcal)</string>
+    <string name="next_days_weather">Proximos dias:</string>
 </resources>

@@ -13,4 +13,10 @@
     <color name="green">#07EE07</color>
     <color name="red">#EE2307</color>
     <color name="yellow">#EED907</color>
+
+    <array name="sample_progress_gradient">
+        <item>#009688</item>
+        <item>#80CBC4</item>
+    </array>
+
 </resources>
